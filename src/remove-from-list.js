@@ -23,27 +23,97 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  */
 
- function removeKFromList(l, k) {
+//  function removeKFromList(l, k) {
+//   let i = 1, n = 'next', v = 'value';
 
-   const f = (obj) => {
+//   while (l[n]) {
+//     if (l[v] == k) {
 
-    if (obj.value == k && obj.next) {
-        obj = obj.next;
-    } 
+//     }
+//   }
 
-    if (obj.value == k && !obj.next) {
-        obj = null;
-        return;
-    } 
+//[3, 1, 2, 3, 3, 4, 5]
 
-    if (obj.next == null) return;
-    return f(obj.next)
-    }
+// function removeKFromList(l, k) {
 
-    f(l);
-    return l
-  
+//   if (l.value == k) {
+//     l = l.next;
+//   }
+
+//   const f = (obj) => {
+
+//     if (obj == null) return;
+
+//     if (obj.value == k) {
+//     obj = obj.next;
+//     f(obj);
+//     } else f(obj.next);
+//   }
+
+//    f(l);
+//    return l;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+function removeKFromList(l, k) {
+
+  if (l.value == k) {
+    l = l.next;
+  }
+
+  const f = (obj) => {
+   if (obj.value == k) {
+    obj = obj.next;
+    f(obj)
+   } 
+
+   if (obj.next !== null) {
+     if (obj.next.value == k) {
+       obj.next = obj.next.next;
+       if (obj.next) {
+         f(obj);
+      } else return;
+       if (obj.next.value == k) f(obj);
+     } else f(obj.next);
+   }
+ }
+
+   f(l);
+   return l
 }
+
+
+
+
+
+
+//  function removeKFromList(l, k) {
+//    if (l.value == k) l = l.next;
+
+//    const f = (obj) => {
+//     if (obj.value == k) obj = obj.next;
+
+//     if (obj.next !== null) {
+//       if (obj.next.value == k) {
+//         obj.next = obj.next.next;
+//       } 
+//       f(obj.next)
+//     }
+//   }
+
+//     f(l);
+//     return l
+// }
 
 module.exports = {
   removeKFromList
